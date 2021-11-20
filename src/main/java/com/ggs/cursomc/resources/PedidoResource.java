@@ -20,9 +20,10 @@ public class PedidoResource {
 	private PedidoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+//	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Pedido>> find(@PathVariable Integer id) {
 		
-		Optional<Pedido> obj = service.buscar(id);
+		Optional<Pedido> obj = service.find(id);
 		
 		/**
 		Pedido cat1 = new Pedido (1, "Informatica");
