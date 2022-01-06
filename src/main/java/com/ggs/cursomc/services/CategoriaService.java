@@ -53,7 +53,7 @@ public class CategoriaService {
 		}
 
 	}
-	
+
 	public List<Categoria> findAll() {
 		return repo.findAll();
 	}
@@ -62,7 +62,7 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
-	
+
 	public Categoria fromDto(CategoriaDto objDto) {
 		return new Categoria(objDto.getId(), objDto.getNome());
 	}
