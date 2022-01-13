@@ -30,9 +30,9 @@ public class CategoriaResource {
 	private CategoriaService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Optional<Categoria>> find(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
-		Optional<Categoria> obj = service.find(id);
+		Categoria obj = service.find(id);
 
 		/**
 		 * Categoria cat1 = new Categoria (1, "Informatica"); Categoria cat2 = new
