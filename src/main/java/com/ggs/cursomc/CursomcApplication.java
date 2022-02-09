@@ -16,7 +16,7 @@ import com.ggs.cursomc.domain.Estado;
 import com.ggs.cursomc.domain.ItemPedido;
 import com.ggs.cursomc.domain.Pagamento;
 import com.ggs.cursomc.domain.PagamentoComBoleto;
-import com.ggs.cursomc.domain.PagamentocomCartao;
+import com.ggs.cursomc.domain.PagamentoComCartao;
 import com.ggs.cursomc.domain.Pedido;
 import com.ggs.cursomc.domain.Produto;
 import com.ggs.cursomc.domain.enums.EstadoPagamento;
@@ -144,7 +144,7 @@ public class CursomcApplication implements CommandLineRunner {
 		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
 		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
 		
-		Pagamento pagto1 = new PagamentocomCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pagto1);
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
 		ped2.setPagamento(pagto2);
@@ -158,8 +158,8 @@ public class CursomcApplication implements CommandLineRunner {
 		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
 		
-		ped1.getItems().addAll(Arrays.asList(ip1, ip2));
-		ped2.getItems().addAll(Arrays.asList(ip3));
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
 		
 		p1.getItems().addAll(Arrays.asList(ip1));
 		p1.getItems().addAll(Arrays.asList(ip3));
