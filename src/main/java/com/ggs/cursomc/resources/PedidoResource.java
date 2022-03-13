@@ -1,7 +1,6 @@
 package com.ggs.cursomc.resources;
 
 import java.net.URI;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,19 +23,9 @@ public class PedidoResource {
 	@Autowired
 	private PedidoService service;
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//	public ResponseEntity<?> find(@PathVariable Integer id) {
-	public ResponseEntity<Optional<Pedido>> find(@PathVariable Integer id) {
-
-		Optional<Pedido> obj = service.find(id);
-
-		/**
-		 * Pedido cat1 = new Pedido (1, "Informatica"); Pedido cat2 = new Pedido (2,
-		 * "Escritorio");
-		 * 
-		 * List<Pedido> lista = new ArrayList<>(); lista.add(cat1); lista.add(cat2);
-		 */
-
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
+		Pedido obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

@@ -1,9 +1,12 @@
 package com.ggs.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+
+import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +43,7 @@ public class ItemPedido implements Serializable {
 		return id.getPedido();
 
 	}
-	
+
 	public void setPedido(Pedido pedido) {
 		id.setPedido(pedido);
 	}
@@ -52,6 +55,7 @@ public class ItemPedido implements Serializable {
 	public void setProduto(Produto produto) {
 		id.setProduto(produto);
 	}
+
 	public ItemPedidoPK getId() {
 		return id;
 	}
@@ -107,6 +111,21 @@ public class ItemPedido implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		java.text.NumberFormat nf = java.text.NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qtde: ");
+		builder.append(getQuantidade());
+		builder.append(", Preco unitario: ");
+		builder.append(nf.format(getPreco()));
+		builder.append(", Subtotal: ");
+		builder.append(nf.format(getSubTotal()));
+		builder.append("\n");
+		return builder.toString();
 	}
 
 }

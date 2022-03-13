@@ -31,26 +31,31 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 
-
 	@Autowired
 	private ProdutoService produtoService;
 
-	public Optional<Pedido> find(Integer id) {
-		Optional<Pedido> obj = repo.findById(id);
+	@Autowired
+	private ClienteService clienteService;
 
+	// public Optional<Pedido> find(Integer id) {
+	public Pedido find(Integer id) {
+		Optional<Pedido> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 		// if (obj == null) {
 		// throw new ObjectNotFoundException(
 		// "Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName());
 		// }
 		// return obj;
-		return Optional.of(obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName())));
+		// return Optional.of(obj.orElseThrow(() -> new ObjectNotFoundException(
+		// "Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName())));
 	}
 
 	@Transactional
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		obj.setCliente(clienteService.find(obj.getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		if (obj.getPagamento() instanceof PagamentoComBoleto) {
@@ -62,7 +67,8 @@ public class PedidoService {
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setPreco(produtoService.find(ip.getProduto().getId()).get().getPreco());
+			ip.setProduto(produtoService.find(ip.getProduto().getId()).get());
+			ip.setPreco(ip.getProduto().getPreco());
 			ip.setPedido(obj);
 
 		}
