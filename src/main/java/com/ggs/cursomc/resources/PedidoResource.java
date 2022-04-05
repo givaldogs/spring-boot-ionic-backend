@@ -29,6 +29,8 @@ public class PedidoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
+	//@RequestMapping(method = RequestMethod.POST, consumes = {"application/xml","application/json"})
+	//@PostMapping(value = "/", consumes = {"application/xml","application/json"}) 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
 		obj = service.insert(obj);

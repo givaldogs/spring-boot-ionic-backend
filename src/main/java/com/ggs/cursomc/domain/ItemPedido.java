@@ -6,8 +6,6 @@ import java.util.Locale;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

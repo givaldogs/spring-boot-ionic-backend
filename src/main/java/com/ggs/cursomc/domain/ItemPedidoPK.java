@@ -1,7 +1,6 @@
 package com.ggs.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
